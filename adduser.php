@@ -9,7 +9,7 @@
 <body>
 
 
-<form action="addusertodatabase.php" method = "post">
+<form action="adduserprocess.php" method = "post">
   Username:<input type="text" name="username" maxlength="25" minlength="6"> <br>
   Password:<input type="password" name="password" maxlength="25" minlength="8"> <br>
   Tutorgroup:<input type="text" name="tutorgroup" maxlength="5" minlength="3"><br>

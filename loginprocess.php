@@ -27,9 +27,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         $_SESSION['suser']=$row['username'];
         
         //sends user to respective home pages
-        if($row['role']== 2){
+        if($row['role']== 1){
             header('Location: pupilhome.php');
-        }elseif($row['role']== 1){
+        }elseif($row['role']== 2){
             header('Location: tutorhome.php');
         }else{
             header('Location: adminhome.php');
@@ -44,7 +44,7 @@ if(empty($row) and !isset($_SESSION['suser'])){
     header('Location: login.php');
 }
 
-}
+
 
 
 
