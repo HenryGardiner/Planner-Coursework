@@ -66,5 +66,4 @@ $stmt = $conn->prepare("INSERT INTO tbluser(username,userid,password,tutorgroup,
     ('_admin', NULL,'$adminpassword','admin',0)");
 $stmt->execute();
 $stmt->closeCursor(); 
-
 ?>
