@@ -1,3 +1,8 @@
+<?php
+session_start(); 
+echo($_SESSION['srole']);
+echo($_SESSION['suser']);
+?>
 <!DOCTYPE html>
 <html>
 <head>

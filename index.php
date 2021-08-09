@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>Log in</h1>
+<h1>Login</h1>
 
 <!-- posts the values of 'username' and 'password' to loginprocess.php to be processed-->
 <form action="loginprocess.php" method= "POST">

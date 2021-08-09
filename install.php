@@ -23,7 +23,7 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS tbluser;
 CREATE TABLE tbluser 
 (username VARCHAR(25) NOT NULL,
 userid INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-password VARCHAR(25) NOT NULL,
+password VARCHAR(255) NOT NULL,
 tutorgroup VARCHAR(5) NOT NULL,
 role TINYINT(1))");
 $stmt->execute();
@@ -59,5 +59,12 @@ tagid INT(5),
 PRIMARY KEY(taskid,tagid))");
 $stmt->execute();
 $stmt->closeCursor();
+
+$adminpassword = password_hash('%_admin%', PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("INSERT INTO tbluser(username,userid,password,tutorgroup,role)VALUES 
+    ('_admin', NULL,'$adminpassword','admin',0)");
+$stmt->execute();
+$stmt->closeCursor(); 
 
 ?>

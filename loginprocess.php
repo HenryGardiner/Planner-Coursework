@@ -17,21 +17,33 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
     $hash=$row['password'];
     $attempt=$_POST['password'];
+    echo($hash);
+    echo($attempt);
     if (password_verify($attempt,$hash)) { //this checks the hash of the inputted 
         //password against the hash of the actual password in the database
-        
+        echo("password correct");
         //sets session variables
         $_SESSION['srole']=$row['role']; 
         $_SESSION['suser']=$row['username'];
         
         //sends user to respective home pages
         if($row['role']== 2){
-            header('Location: adminhome.php');
+            header('Location: pupilhome.php');
         }elseif($row['role']== 1){
             header('Location: tutorhome.php');
         }else{
-            header('Location: pupilhome.php');
+            header('Location: adminhome.php');
         }
+    }else{
+        //echo('incorrect password ');
+        header('Location: login.php');
+    }
+}
+if(empty($row) and !isset($_SESSION['suser'])){
+    //echo('incorrect username ');
+    header('Location: login.php');
+}
+
 }
 
 
