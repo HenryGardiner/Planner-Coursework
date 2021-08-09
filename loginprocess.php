@@ -25,6 +25,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         //sets session variables
         $_SESSION['srole']=$row['role']; 
         $_SESSION['suser']=$row['username'];
+        $_SESSION['suserid']=$row['userid'];
         
         //sends user to respective home pages
         if($row['role']== 1){

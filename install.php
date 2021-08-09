@@ -66,4 +66,14 @@ $stmt = $conn->prepare("INSERT INTO tbluser(username,userid,password,tutorgroup,
     ('_admin', NULL,'$adminpassword','admin',0)");
 $stmt->execute();
 $stmt->closeCursor(); 
+
+$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid,role)VALUES 
+    (NULL,'Important','ff0000',99999)");
+$stmt->execute();
+$stmt->closeCursor(); 
+$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid,role)VALUES 
+    (NULL,'Complete','00ff00',99999)");
+$stmt->execute();
+$stmt->closeCursor(); 
+
 ?>
