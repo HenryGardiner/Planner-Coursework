@@ -25,7 +25,7 @@ session_start();
 </form>
 <br>
 
-<form action="viewtasks.php" method="get">
+<form action="viewtask.php" method="get">
     <input type="submit" value="View tasks">
 </form>
 <br>

@@ -62,16 +62,17 @@ $stmt->closeCursor();
 
 $adminpassword = password_hash('%_admin%', PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("INSERT INTO tbluser(username,userid,password,tutorgroup,role)VALUES 
+$stmt = $conn->prepare("INSERT INTO tbluser(username,userid,password,tutorgroup, role)VALUES 
     ('_admin', NULL,'$adminpassword','admin',0)");
 $stmt->execute();
 $stmt->closeCursor(); 
 
-$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid,role)VALUES 
+$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid)VALUES 
     (NULL,'Important','ff0000',99999)");
 $stmt->execute();
 $stmt->closeCursor(); 
-$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid,role)VALUES 
+
+$stmt = $conn->prepare("INSERT INTO tbltag(tagid,tagname,colour,userid)VALUES 
     (NULL,'Complete','00ff00',99999)");
 $stmt->execute();
 $stmt->closeCursor(); 
