@@ -30,5 +30,10 @@ session_start();
 </form>
 <br>
 
+<form action="edittag.php" method="get">
+    <input type="submit" value="Edit tags">
+</form>
+<br>
+
 </body>
 </html>
