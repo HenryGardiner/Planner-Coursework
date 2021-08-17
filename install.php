@@ -46,7 +46,7 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS tbltag;
 CREATE TABLE tbltag
 (tagid INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 tagname VARCHAR(20),
-colour VARCHAR(6),
+colour VARCHAR(7),
 userid INT(5))");
 $stmt->execute();
 $stmt->closeCursor();
