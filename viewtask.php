@@ -4,11 +4,14 @@ session_start();
 
 
 //echo($_SESSION['srole']);
-echo($_SESSION['suser']);
+//echo($_SESSION['suser']);
+//echo($_SESSION['suserid']);
 
 //fetches data from table
-$stmt = $conn->prepare("SELECT taskname, date, time, notes, userid, tsktaskid FROM tbltask");
+$stmt = $conn->prepare("SELECT tsk.taskname, tsk.date, tsk.time, tsk.notes, tsk.userid as userid, tsk.taskid as tsktaskid, tg.tagid as tgtagid, tg.tagname, tg.colour, tstg.taskid as tstgtaskid, tstg.tagid as tstgtagid 
+FROM tbltask as tsk, tbltag as tg, tbltasktag as tstg");
 $stmt->execute(); 
+
 ?>
 
 <!DOCTYPE html>
@@ -34,28 +37,13 @@ $stmt->execute();
         
         <tbody>
             <?php
-
+            
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {
+                echo("a");
                 if ($row['userid']==$_SESSION['suserid']){
-                    echo("<tr><td>".$row['taskname']."</td> <td>".$row['date']."</td> <td>".$row['time']."</td><td>".$row['notes']."</td>
-                    <td>".
-
-                    $stmt = $conn->prepare("SELECT tagid, tc.colour as colour, tn.tagname as tagname
-                    FROM tbltasktag 
-                    INNER JOIN tbltag as tc ON tc.colour = tbltasktag.colour
-                    INNER JOIN tbltag as tn ON tn.tagname = tbltasktag.tagname
-                    WHERE taskid = ".$row['tsktaskid']);
-                    $stmt->execute(); 
-
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-                    {
-                        echo($row['tagname'])
-                    }
-                    ."</td>
-                    <td>complete?</td></tr>");
+                    echo("<tr><td>".$row['taskname']."</td> <td>".$row['date']."</td> <td>".$row['time']."</td><td>".$row['notes']."</td><td>tags</td><td>complete?</td></tr>");  
                 }
-                
             }
             ?>
         </tbody>
