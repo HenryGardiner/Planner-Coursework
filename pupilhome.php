@@ -30,8 +30,8 @@ session_start();
 </form>
 <br>
 
-<form action="edittag.php" method="get">
-    <input type="submit" value="Edit tags">
+<form action="viewtags.php" method="get">
+    <input type="submit" value="View tags">
 </form>
 <br>
 
