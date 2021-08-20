@@ -28,26 +28,34 @@ $stmt3->execute();
       
 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
 {
+    $z=0;
+    $x=0;
+    $tagarray=array();
     if ($row1['userid']==$_SESSION['suserid']){
-        echo("<tr><td>".$row['taskname']."</td> <td>".$row['date']."</td> <td>".$row['time']."</td><td>".$row['notes']."</td>
-        <td>".
         $taskid=$row1['tsktaskid'];
         while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC))
         {
             if ($row3['tstgtaskid']==$taskid){
                 //$tagid=$row3['tstgtagid'];
                 $stmt2->execute();
+                
                 while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
                 {
                     if ($row3['tstgtagid']==$row2['tgtagid']){
                         //echo("tagid success");
-                        echo($row2['tagname']);
+                        array_push($tagarray, $row2['tagname']);
+                        //$tagarray[$z]=($row2['tagname']);
+                        $z+=1;   
                     }
+                    
                 }
             }
-        
         }
-        ."</td><td>complete?</td></tr>");  
+        echo("<tr><td>".$row1['taskname']."</td> <td>".$row1['date']."</td> <td>".$row1['time']."</td><td>".$row1['notes']."</td>
+        <td>"
+        //create a string of the colours before the table begins
+        "</td><td>complete?</td></tr>");  
+        
     }    
 }
 ?>
