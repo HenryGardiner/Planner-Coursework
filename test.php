@@ -28,34 +28,37 @@ $stmt3->execute();
       
 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
 {
-    $z=0;
-    $x=0;
     $tagarray=array();
+    //checks if the task is associated with the user
     if ($row1['userid']==$_SESSION['suserid']){
         $taskid=$row1['tsktaskid'];
         while ($row3 = $stmt3->fetch(PDO::FETCH_ASSOC))
         {
+            //fetches the tag info associated with the task
             if ($row3['tstgtaskid']==$taskid){
-                //$tagid=$row3['tstgtagid'];
+                $tagid=$row3['tstgtagid'];
                 $stmt2->execute();
                 
                 while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
                 {
+                    //to do - this needs to get the tag tagname and colour associated
                     if ($row3['tstgtagid']==$row2['tgtagid']){
-                        //echo("tagid success");
-                        array_push($tagarray, $row2['tagname']);
-                        //$tagarray[$z]=($row2['tagname']);
-                        $z+=1;   
+                     
+                        //take the tagname associated with the tagid and 
+                        
+                        $tagarray[$row2['tagname']]=$row2['colour'];
+                           
                     }
                     
                 }
+            
             }
         }
-        echo("<tr><td>".$row1['taskname']."</td> <td>".$row1['date']."</td> <td>".$row1['time']."</td><td>".$row1['notes']."</td>
-        <td>"
-        //create a string of the colours before the table begins
-        "</td><td>complete?</td></tr>");  
         
+        echo("<tr><td>".$row1['taskname']."</td> <td>".$row1['date']."</td> <td>".$row1['time']."</td><td>".$row1['notes']."</td>
+        <td>
+             
+        </td><td>complete?</td></tr>");
     }    
 }
 ?>
