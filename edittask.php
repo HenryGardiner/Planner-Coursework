@@ -2,7 +2,8 @@
 session_start(); 
 $uid=$_SESSION['suserid'];
 include_once('connection.php');
-$stmt = $conn->prepare("SELECT taskname, date, time, notes, taskid FROM tbltask WHERE userid=$uid");
+$taskid=reset($_POST);
+$stmt = $conn->prepare("SELECT taskname, date, time, notes, taskid FROM tbltask WHERE taskid=$taskid");
 $stmt->execute();
 ?>
 <!DOCTYPE html>
@@ -11,6 +12,7 @@ $stmt->execute();
 <?php
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
+
     //print_r($row);
     ?>
     <form action="edittaskprocess.php" method = "post">

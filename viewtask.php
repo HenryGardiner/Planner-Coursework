@@ -3,22 +3,16 @@ include_once('connection.php');
 session_start(); 
 
 
-//echo($_SESSION['srole']);
-//echo($_SESSION['suser']);
-//echo($_SESSION['suserid']);
-
-//fetches data from table
+//fetches task data from tbltask
 $stmt1 = $conn->prepare("SELECT tsk.taskname, tsk.date, tsk.time, tsk.notes, tsk.userid, tsk.taskid as tsktaskid
 FROM tbltask as tsk");
 $stmt1->execute();
 
-
-
+//fetches data from tbltag
 $stmt2 = $conn->prepare("SELECT tagid as tgtagid, tagname, colour
 FROM tbltag");
 
-
-
+//fetches data from tbltasktag
 $stmt3 = $conn->prepare("SELECT taskid as tstgtaskid, tagid as tstgtagid 
 FROM tbltasktag
 ");
@@ -35,19 +29,18 @@ $stmt3->execute();
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 </head>
 
+<!-- creates the table using javascript-->
+<table id="tasktable">
+    <thead>
+    <?php 
+    
+        echo("<th>Task Name</th> <th>Date due</th> <th>Time due</th> <th>Notes</th> <th>Tags</th> <th>Complete?</th>");
 
-<form  action="updateorders.php" method="post">
-    <table id="tasktable">
-        <thead>
-        <?php 
-        
-            echo("<th>Task Name</th> <th>Date due</th> <th>Time due</th> <th>Notes</th> <th>Tags</th> <th>Complete?</th>");
-
-        ?>
-        </thead>
-        
-        <tbody>
-            <?php
+    ?>
+    </thead>
+    
+    <tbody>
+        <?php
             
 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
 {
@@ -81,11 +74,18 @@ while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
         echo("<tr><td>".$row1['taskname']."</td> <td>".$row1['date']."</td> <td>".$row1['time']."</td><td>".$row1['notes']."</td>
         <td>");
         $keys=array_keys($tagarray);
+        //prints the tags associated with a task
         foreach($keys as $value){
-            echo($value." ");
+            echo($value.", ");
         }
-        echo("</td>
-        <td>complete?</td></tr>");
+        echo("</td><td>");
+        ?>
+        <!-- adds an edit task button that will post the associated taskid-->
+        <form action="edittask.php" method = "post">
+            <input name='<?php echo($row1['tsktaskid']);?>' type='hidden' value="<?php echo($row1['tsktaskid']);?>">
+            <input type="submit" value="Edit Task">
+        </form><?php
+        echo("</td></tr>");
     }    
 }
             ?>
@@ -102,6 +102,6 @@ while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
         $('#tasktable').DataTable();
     });
     </script>
-</form>
+
 </body>
 </html> 
