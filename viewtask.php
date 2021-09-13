@@ -34,7 +34,7 @@ $stmt3->execute();
     <thead>
     <?php 
     
-        echo("<th>Task Name</th> <th>Date due</th> <th>Time due</th> <th>Notes</th> <th>Tags</th> <th>Complete?</th>");
+        echo("<th>Task Name</th> <th>Date due</th> <th>Time due</th> <th>Notes</th> <th>Tags</th> <th>Edit</th>");
 
     ?>
     </thead>

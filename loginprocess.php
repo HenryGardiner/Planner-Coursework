@@ -26,6 +26,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         $_SESSION['srole']=$row['role']; 
         $_SESSION['suser']=$row['username'];
         $_SESSION['suserid']=$row['userid'];
+        $_SESSION['stgroup']=$row['tutorgroup'];
         
         //sends user to respective home pages
         if($row['role']== 1){
