@@ -60,14 +60,10 @@ while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
                     //to do - this needs to get the tag tagname and colour associated
                     if ($row3['tstgtagid']==$row2['tgtagid']){
                         
-                        //take the tagname associated with the tagid and 
-                        
-                        $tagarray[$row2['tagname']]=$row2['colour'];
-                            
+                        //take the tagname associated with the tagid and add it as a key to tagarray and the colour associated with the tagid
+                        $tagarray[$row2['tagname']]=$row2['colour'];     
                     }
-                    
                 }
-            
             }
         }
         //prints the data into the table
