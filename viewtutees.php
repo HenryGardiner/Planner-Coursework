@@ -6,7 +6,7 @@ $uid=$_SESSION['suserid'];
 $tgroup=$_SESSION['stgroup'];
 
 
-$stmt = $conn->prepare("SELECT username FROM tbluser WHERE tutorgroup='$tgroup' AND role=1");
+$stmt = $conn->prepare("SELECT username,userid FROM tbluser WHERE tutorgroup='$tgroup' AND role=1");
 $stmt->execute(); 
 ?>
 
@@ -27,17 +27,17 @@ $stmt->execute();
         ?>
         </thead>
         <tbody>
-            <?php 
+            <?php
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {
                 echo("<tr><td>".$row['username']."</td><td>");
                 ?>
                 <!-- adds an edit task button that will post the associated taskid-->
-                <form action="viewtutee.php" method = "post">
-                    <input name='<?php echo($row1['tsktaskid']);?>' type='hidden' value="<?php echo($row1['tsktaskid']);?>">
-                    <input type="submit" value="Vew tutee">
+                <form action="tutorview.php" method = "post">
+                    <input name='<?php echo($row['userid']);?>' type='hidden' value="<?php echo($row['userid']);?>">
+                    <input type="submit" value="View tutee">
                 </form><?php
-                echo("</td></tr>");  
+                echo("</td></tr>");
             }
             ?>
         </tbody>
