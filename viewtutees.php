@@ -34,7 +34,7 @@ $stmt->execute();
                 ?>
                 <!-- adds an edit task button that will post the associated taskid-->
                 <form action="tutorview.php" method = "post">
-                    <input name='<?php echo($row['userid']);?>' type='hidden' value="<?php echo($row['userid']);?>">
+                    <input name='tutuserid' type='hidden' value="<?php echo($row['userid']);?>">
                     <input type="submit" value="View tutee">
                 </form><?php
                 echo("</td></tr>");
