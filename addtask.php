@@ -26,7 +26,7 @@
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
-		echo('<input type="checkbox" value='.$row["tagname"].'>'.$row["tagname"]);
+		echo('<input type="checkbox" name='.$row["tagid"].'>'.$row["tagname"]);
 	}
 	?>
 	
@@ -35,3 +35,4 @@
 
 </body>
 </html>
+<!-- value='.$row["tagid"].'

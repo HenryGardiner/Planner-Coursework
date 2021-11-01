@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-$uid=$_SESSION['suserid'];
+
 include_once('connection.php');
 $taskid=reset($_POST);
 $stmt = $conn->prepare("SELECT taskname, date, time, notes, taskid FROM tbltask WHERE taskid=$taskid");
@@ -21,34 +21,41 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
     Time:<input name='time' type='time' value="<?php echo($row['time']) ?>" required><br>
     Notes:<textarea name='notes' type='text'rows="4" cols="50" required><?php echo($row['notes']) ?></textarea> <br>
     <input name='taskid' type='hidden' value="<?php echo($row['taskid']) ?>" ><br>
+    Tags:
+    <br>
     <?php
     $uid=$_SESSION['suserid'];
 	$stmt2 = $conn->prepare("SELECT * FROM tbltag WHERE userid=$uid OR userid=99999 AND tagname!='Complete'");
-	$stmt2->execute();
-	while ($row2 = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
-        echo("hek");
-		echo('<input type="checkbox" value='.$row["tagname"].'>'.$row["tagname"]);
-        $tskid=$row["taskid"];
-        $stmt1 = $conn->prepare("SELECT * FROM tbltasktag WHERE taskid=$tskid");
-	    $stmt1->execute();
-        while ($row1 = $stmt->fetch(PDO::FETCH_ASSOC))
+    $stmt2->execute();
+    while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
+    {
+        $stmt1 = $conn->prepare("SELECT tagid as tsktag, taskid as tsktask FROM tbltasktag WHERE taskid=$taskid");
+        $stmt1->execute();
+        $found=False;
+        while($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
         {
-            if ($row1["tagid"]==$row["tagid"]){
-                echo(".'checked'");
-            }
+            if($row1["tsktag"]=$row2["tagid"]){
+            $found=True;
+            }else{}
         }
-	}
-	?>
-    <input type="submit" value="Update Task">
-    </form>
+        
+        if ($found=True){
+            echo('<input type="checkbox" name="'.$row2["tagname"].'" value="'.$row2["tagname"].'"checked><label for="'.$row2["tagname"].'">'.$row2["tagname"].'</label><br>');
+        }else{
+            echo('<input type="checkbox" name="'.$row2["tagname"].'" value="'.$row2["tagname"].'"><label for="'.$row2["tagname"].'">'.$row2["tagname"].'</label><br>');
+        }
+    }
+}?>
     
-    <form action="viewtask.php" method="get">
-    <input type="submit" value="Cancel">
-    </form> 
+<input type="submit" value="Update Task">
+</form>
 
-<?php
-}
-?>
+<form action="viewtask.php" method="get">
+<input type="submit" value="Cancel">
+</form> 
+    
+
+
+
 </body>
 </html> 
