@@ -25,7 +25,8 @@ CREATE TABLE tbluser
 userid INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 password VARCHAR(255) NOT NULL,
 tutorgroup VARCHAR(5) NOT NULL,
-role TINYINT(1))");
+role TINYINT(1),
+workgoal INT(6))");
 $stmt->execute();
 $stmt->closeCursor();
 
