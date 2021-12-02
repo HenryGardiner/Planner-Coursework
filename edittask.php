@@ -19,7 +19,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
     Taskname:<input name='taskname' type='text' value="<?php echo($row['taskname']) ?>"required><br>
     Date:<input name='date' type='date' value="<?php echo($row['date']) ?>"required><br>
     Time:<input name='time' type='time' value="<?php echo($row['time']) ?>" required><br>
-    Notes:<textarea name='notes' type='text'rows="4" cols="50" required><?php echo($row['notes']) ?></textarea> <br>
+    Notes:<textarea name='notes' type='text'rows="4" cols="50" ><?php echo($row['notes']) ?></textarea> <br>
     <input name='taskid' type='hidden' value="<?php echo($row['taskid']) ?>" ><br>
     Tags:
     <br>
