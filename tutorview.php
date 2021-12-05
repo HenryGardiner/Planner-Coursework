@@ -33,9 +33,19 @@ while ($row4 = $stmt4->fetch(PDO::FETCH_ASSOC))
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tutee Task</title>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <!-- creates the table using javascript-->
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="tutorhome.php">Home</a>
+    </div>
+</nav>
 <h1>
     Tasks: <?php echo($tuteename) ?>
 </h1>
